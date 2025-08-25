@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ApexPlanet | Web Tasks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    header {
+      background-color: #1a73e8;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    section {
+      padding: 30px;
+      margin: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h2 {
+      color: #333;
+    }
+
+    
+    .contact-form .form-group {
+      margin-bottom: 15px;
+    }
+    .contact-form label {
+      display: block;
+      font-weight: bold;
+    }
+    .contact-form input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .submit-btn {
+      background-color: #1a73e8;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #135fd1;
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 20px;
+    }
+    .grid-layout .sidebar {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 6px;
+    }
+    .grid-layout .main-content {
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-radius: 6px;
+    }
+
+   
+    .todo-container input {
+      width: 75%;
+      padding: 10px;
+    }
+    .todo-container button {
+      padding: 10px;
+    }
+    .todo-container ul {
+      list-style: none;
+      padding: 0;
+    }
+    .todo-container li {
+      background-color: #f0f0f0;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .remove {
+      color: red;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ApexPlanet Software Pvt Ltd</h1>
+    <p>Intermediate HTML, CSS, and JavaScript Tasks</p>
+  </header>
+
+  <section>
+    <h2>Contact Form with Validation</h2>
+    <form class="contact-form" id="contactForm">
+      <div class="form-group">
+        <label for="name">Name*</label>
+        <input type="text" id="name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email*</label>
+        <input type="email" id="email" required />
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <input type="text" id="message" />
+      </div>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </section>
+
+  
+  <section>
+    <h2>Task 4: To-Do List</h2>
+    <div class="todo-container">
+      <input type="text" id="todo-input" placeholder="Enter a task" />
+      <button onclick="addTask()">Add Task</button>
+      <ul id="todo-list"></ul>
+    </div>
+  </section>
+ 
+  <section>
+    <h2>Task 3: Responsive Layout (Flexbox & Grid)</h2>
+    <div class="grid-layout">
+      <div class="sidebar">
+        <h3>Sidebar</h3>
+        <p>This is the sidebar content using CSS Grid.</p>
+      </div>
+      <div class="main-content">
+        <h3>Main Content</h3>
+        <p>This section is designed using Grid Layout and adapts to screen size using media queries.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+      if (name === "") {
+        alert("Name is required.");
+        e.preventDefault();
+        return;
+      }
+
+      if (!email.match(emailPattern)) {
+        alert("Please enter a valid email address.");
+        e.preventDefault();
+        return;
+      }
+
+      alert("Form submitted successfully!");
+    });
+
+    
+    function addTask() {
+      const input = document.getElementById("todo-input");
+      const taskText = input.value.trim();
+      if (taskText === "") return;
+
+      const li = document.createElement("li");
+      li.textContent = taskText;
+
+      const span = document.createElement("span");
+      span.textContent = "✖";
+      span.className = "remove";
+      span.onclick = function () {
+        this.parentElement.remove();
+      };
+
+      li.appendChild(span);
+      document.getElementById("todo-list").appendChild(li);
+      input.value = "";
+    }
+  </script>
+
+</body>
+</html>
